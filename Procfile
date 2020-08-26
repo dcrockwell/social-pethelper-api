@@ -1,0 +1,1 @@
+serve: rails s -b 'ssl://127.0.0.1:3000?key=config/ssl/localhost.dcrockwell.key&cert=config/ssl/localhost.dcrockwell.crt'
