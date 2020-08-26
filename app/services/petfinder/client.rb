@@ -13,20 +13,32 @@ module Petfinder
         end
 
         def fetch_token
-            response = connection.post(url + '/oauth2/token', {
+            body = post('/oauth2/token', {
                 grant_type: 'client_credentials',
                 client_id: @key,
                 client_secret: @secret
             })
 
-            body = JSON.parse(response.body)
-
-            raise Petfinder::RequestError, body['detail'] if response.status != 200
-
             @token = body['access_token']
         end
 
         private
+
+        def post(path, data)
+            request(:post, path, data)
+        end
+
+        def request(method, path, data)
+            response = case method
+            when :post then connection.post(url + path, data)
+            end
+
+            body = JSON.parse(response.body)
+
+            raise Petfinder::RequestError, body['detail'] if response.status != 200
+
+            return body
+        end
 
         def validate_credentials(key, secret)
             raise Petfinder::KeyError if key.blank?
