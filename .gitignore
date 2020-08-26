@@ -33,3 +33,11 @@
 
 # Ignore environment variables
 .env
+
+# Ignore Visual Paradigm Backups
+/Documentation/*.bak*
+
+# Ignore simplecov coverage
+/coverage
+
+*.DS_Store
