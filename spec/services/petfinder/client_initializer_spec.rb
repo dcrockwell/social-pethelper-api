@@ -1,15 +1,15 @@
 require 'rails_helper'
 
 describe Petfinder::Client, 'initializer' do
-    let(:credentials) do
+    let(:config) do
         {
             key: 'abc123',
             secret: 'def456',
-            url: 'https://api.petfinder.com/v2'
+            connection: Faraday.new
         }
-    end
+    end   
 
-    subject { Petfinder::Client.new(**credentials) }
+    subject { Petfinder::Client.new(**config) }
 
     describe 'with valid arguments' do
         it 'initializes without error' do
@@ -19,33 +19,38 @@ describe Petfinder::Client, 'initializer' do
 
     describe 'with invalid arguments' do
         it 'raises exception when key is nil' do
-            credentials[:key] = nil
+            config[:key] = nil
             expect { subject }.to raise_error(Petfinder::KeyError)
         end
 
         it 'raises exception when key is an empty string' do
-            credentials[:key] = ''
+            config[:key] = ''
             expect { subject }.to raise_error(Petfinder::KeyError)
         end
 
         it 'raises exception when secret is nil' do
-            credentials[:secret] = nil
+            config[:secret] = nil
             expect { subject }.to raise_error(Petfinder::SecretError)
         end
 
         it 'raises exception when secret is an empty string' do
-            credentials[:secret] = ''
+            config[:secret] = ''
             expect { subject }.to raise_error(Petfinder::SecretError)
         end
+    end
 
-        it 'raises exception when url is nil' do
-            credentials[:url] = nil
-            expect { subject }.to raise_error(Petfinder::UrlError)
+    describe 'with missing keywords' do
+        it 'raises exception when key is missing' do
+            config.delete(:key)
+            expect { subject }.to raise_error(ArgumentError, 'missing keyword: :key')
         end
-
-        it 'raises exception when url is an empty string' do
-            credentials[:url] = ''
-            expect { subject }.to raise_error(Petfinder::UrlError)
+        it 'raises exception when secret is missing' do
+            config.delete(:secret)
+            expect { subject }.to raise_error(ArgumentError, 'missing keyword: :secret')
+        end
+        it 'raises exception when connection is missing' do
+            config.delete(:connection)
+            expect { subject }.to raise_error(ArgumentError, 'missing keyword: :connection')
         end
     end
 end
