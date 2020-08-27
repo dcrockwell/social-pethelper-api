@@ -18,7 +18,7 @@ module Petfinder
         # @param [String] url Optional custom URL. Defaults to v2 URL.
         #
         def initialize(key:, secret:, connection:, url: DEFAULT_URL)
-            validate_credentials key: key, secret: secret
+            validate_credentials(key: key, secret: secret)
 
             @key = key
             @secret = secret
