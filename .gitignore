@@ -40,4 +40,9 @@
 # Ignore simplecov coverage
 /coverage
 
+# Ignore mac system files
 *.DS_Store
+
+# Ignore yard documentation
+/doc
+.yardoc
