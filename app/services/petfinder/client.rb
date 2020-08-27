@@ -12,6 +12,14 @@ module Petfinder
         #
         # Initializes the Petfinder Client with the provided credentials and Faraday connection object
         #
+        # @example
+        #   Petfinder::Client.new(
+        #       key: '<petfinder-api-key>',
+        #       secret: '<petfinder-api-secret>',
+        #       connection: Faraday.new,
+        #       url: 'http://optional.custom.url'
+        #   )
+        #
         # @param [String] key Petfinder API Key (also known as a Client ID)
         # @param [String] secret Petfinder API Secret (also known as a Client Secret)
         # @param [Faraday] connection Faraday instance used to connect to Petfinder
