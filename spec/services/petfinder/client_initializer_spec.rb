@@ -20,22 +20,22 @@ describe Petfinder::Client, 'initializer' do
     describe 'with invalid arguments' do
         it 'raises exception when key is nil' do
             config[:key] = nil
-            expect { subject }.to raise_error(Petfinder::KeyError)
+            expect { subject }.to raise_error(Petfinder::KeyError, 'Key is nil')
         end
 
         it 'raises exception when key is an empty string' do
             config[:key] = ''
-            expect { subject }.to raise_error(Petfinder::KeyError)
+            expect { subject }.to raise_error(Petfinder::KeyError, 'Key is empty string')
         end
 
         it 'raises exception when secret is nil' do
             config[:secret] = nil
-            expect { subject }.to raise_error(Petfinder::SecretError)
+            expect { subject }.to raise_error(Petfinder::SecretError, 'Secret is nil')
         end
 
         it 'raises exception when secret is an empty string' do
             config[:secret] = ''
-            expect { subject }.to raise_error(Petfinder::SecretError)
+            expect { subject }.to raise_error(Petfinder::SecretError, 'Secret is empty string')
         end
     end
 

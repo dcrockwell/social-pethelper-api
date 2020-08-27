@@ -41,8 +41,8 @@ module Petfinder
         end
 
         def validate_credentials(key, secret)
-            raise Petfinder::KeyError if key.blank?
-            raise Petfinder::SecretError if secret.blank?
+            raise Petfinder::KeyError, "Key is #{key.nil? ? 'nil' : 'empty string'}" if key.blank?
+            raise Petfinder::SecretError, "Secret is #{secret.nil? ? 'nil' : 'empty string'}" if secret.blank?
         end
     end
 end
