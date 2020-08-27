@@ -1,10 +1,13 @@
 module Petfinder
     include Petfinder::Errors
 
+    DEFAULT_URL = 'https://api.petfinder.com/v2'
+    TOKEN_PATH = '/oauth2/token'
+
     class Client
         attr_accessor :url, :connection, :token
 
-        def initialize(key:, secret:, connection:, url: 'https://api.petfinder.com/v2')
+        def initialize(key:, secret:, connection:, url: DEFAULT_URL)
             validate_credentials(key, secret)
             @key = key
             @secret = secret
@@ -13,7 +16,7 @@ module Petfinder
         end
 
         def fetch_token
-            body = post('/oauth2/token', {
+            body = post(TOKEN_PATH, {
                 grant_type: 'client_credentials',
                 client_id: @key,
                 client_secret: @secret
