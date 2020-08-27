@@ -12,7 +12,7 @@ module Petfinder::Request
 
         body = JSON.parse(response.body)
 
-        raise Petfinder::RequestError, body['detail'] if response.status != 200
+        raise Petfinder::Client::RequestError, body['detail'] if response.status != 200
 
         return body
     end

@@ -44,6 +44,6 @@ describe Petfinder::Client, '.fetch_token with invalid credentials' do
     after(:each) { stubs.verify_stubbed_calls }
 
     it 'raises an exception' do
-        expect { subject }.to raise_error(Petfinder::RequestError, 'Client authentication failed')
+        expect { subject }.to raise_error(Petfinder::Client::RequestError, 'Client authentication failed')
     end
 end
