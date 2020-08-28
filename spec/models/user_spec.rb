@@ -20,6 +20,10 @@ describe User, type: :model do
     expect(subject.email).to eql(email)
   end
 
+  it 'has many access_tokens' do
+    expect(User.reflect_on_association(:access_tokens).macro).to eq(:has_many)
+  end
+
   describe 'secure password' do
     let(:user) { User.find_by_name(name) }
 
