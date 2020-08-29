@@ -54,6 +54,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   end
 
   watch(%r{^app/services/(.+)\.rb$}) { |m| "spec/services" }
+  watch(%r{^app/controllers/(.+)\.rb$}) { |m| "spec/requests" }
 
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
