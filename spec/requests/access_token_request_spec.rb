@@ -22,6 +22,7 @@ describe 'AccessToken', type: :request do
         expected_json = {
           access_token: {
             token: access_token.token,
+            created_at: access_token.created_at.as_json,
             expires_at: access_token.expires_at.as_json
           }
         }
