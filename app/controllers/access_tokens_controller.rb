@@ -9,12 +9,7 @@ class AccessTokensController < ApplicationController
 
     access_token = user.access_tokens.create!(expires_at: DateTime.now + 1.day)
 
-    render json: {
-      access_token: {
-        token: access_token.token,
-        expires_at: access_token.expires_at.utc.to_s
-      }
-    }, status: 200
+    render json: access_token, root: true, only: [:token, :created_at, :expires_at], status: 200
   end
 
   def show

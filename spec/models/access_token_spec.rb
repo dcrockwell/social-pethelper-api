@@ -23,4 +23,11 @@ describe AccessToken, type: :model do
     expect(SecureRandom).to receive(:hex).and_return token
     expect(active_token.token).to eql(token)
   end
+
+  it 'defaults expiration to 24 hours from now' do
+    travel_to(Time.now) do
+      access_token = AccessToken.create!(user: user)
+      expect(access_token.expires_at.to_datetime).to eql((DateTime.now + 1.day))
+    end
+  end
 end
