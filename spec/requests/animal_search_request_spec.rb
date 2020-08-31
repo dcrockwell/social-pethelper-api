@@ -14,9 +14,10 @@ describe 'Animal Search', type: :request do
   describe 'authenticated' do
     let(:user) { User.new }
     let(:access_token) { AccessToken.create!(user: user) }
-    let(:petfinder_client) { instance_double(Petfinder::Client) }
     let(:animals) { JSON.parse(File.read(Rails.root.join('spec/services/petfinder/fixtures/animals.json'))) }
+    let(:animals_data) { animals['animals'] }
     let(:last_search) { Search.last }
+    let(:client) { instance_double(Petfinder::Client) }
 
     subject { perform_search }
 
@@ -25,9 +26,8 @@ describe 'Animal Search', type: :request do
     end
 
     before :each do
-      Search.petfinder(client: petfinder_client)
-      allow(Search.petfinder).to receive(:animals).and_return(animals)
-
+      allow(Petfinder::Service).to receive(:client).and_return(client)
+      allow(Petfinder::Service.client).to receive(:animals).and_return(animals_data)
       subject
     end
 
@@ -36,7 +36,7 @@ describe 'Animal Search', type: :request do
     end
 
     it 'returns unfiltered results' do
-      expect(response.body).to include_json({ animals: animals })
+      expect(response.body).to include_json(animals)
     end
 
     it 'creates a new search database when unique' do
@@ -51,13 +51,5 @@ describe 'Animal Search', type: :request do
       perform_search
       expect(last_search.times_searched).to eql(2)
     end
-
-    # it 'filters by species' do
-    #   expect(response.body).to include_json(animals_by_species)
-    # end
-
-    # it 'filters by zip code'
-    # it 'filters by distance'
-
   end
 end

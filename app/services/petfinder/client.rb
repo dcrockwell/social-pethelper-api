@@ -69,7 +69,7 @@ module Petfinder
     # @return [Hash] Deserialized JSON Animal Data
     #
     def animals
-      get path: '/animals'
+      get(path: '/animals')['animals']
     end
   end
 end
