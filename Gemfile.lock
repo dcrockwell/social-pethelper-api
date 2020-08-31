@@ -56,6 +56,9 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.7.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    api_cache (0.3.0)
     bcrypt (3.1.13)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -64,6 +67,7 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.7)
     crass (1.0.6)
+    dalli (2.7.10)
     diff-lcs (1.4.4)
     docile (1.3.2)
     dotenv (2.7.6)
@@ -96,11 +100,6 @@ GEM
     listen (3.2.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
-    lograge (0.11.2)
-      actionpack (>= 4)
-      activesupport (>= 4)
-      railties (>= 4)
-      request_store (~> 1.0)
     loofah (2.6.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -126,6 +125,7 @@ GEM
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (4.0.5)
     puma (4.3.5)
       nio4r (~> 2.0)
     rack (2.2.3)
@@ -161,12 +161,12 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    request_store (1.5.0)
-      rack (>= 1.4)
     rspec (3.9.0)
       rspec-core (~> 3.9.0)
       rspec-expectations (~> 3.9.0)
       rspec-mocks (~> 3.9.0)
+    rspec-collection_matchers (1.2.0)
+      rspec-expectations (>= 2.99.0.beta1)
     rspec-core (3.9.2)
       rspec-support (~> 3.9.3)
     rspec-expectations (3.9.2)
@@ -216,18 +216,21 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  addressable
+  api_cache
   bcrypt
   bootsnap (>= 1.4.2)
   byebug
+  dalli
   dotenv-rails
   faraday
   guard
   guard-rspec
   listen (~> 3.2)
-  lograge
   pry
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.2)
+  rspec-collection_matchers
   rspec-json_expectations
   rspec-rails
   rufo

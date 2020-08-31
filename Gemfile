@@ -38,6 +38,7 @@ group :development, :test do
   gem 'pry'
   gem 'rspec-rails'
   gem 'rspec-json_expectations'
+  gem 'rspec-collection_matchers'
 end
 
 group :development do
@@ -54,3 +55,6 @@ end
 # gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'faraday'
 gem 'bcrypt'
+gem 'api_cache'
+gem 'dalli'
+gem 'addressable'
