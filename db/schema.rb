@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_28_213751) do
+ActiveRecord::Schema.define(version: 2020_08_30_225536) do
 
   create_table "access_tokens", force: :cascade do |t|
     t.string "token"
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 2020_08_28_213751) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["token"], name: "index_access_tokens_on_token"
     t.index ["user_id"], name: "index_access_tokens_on_user_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string "query_parameters"
+    t.integer "times_searched", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["query_parameters"], name: "index_searches_on_query_parameters"
   end
 
   create_table "users", force: :cascade do |t|
