@@ -4,13 +4,16 @@ describe User, type: :model do
   let(:name) { 'Bob T. Builder' }
   let(:email) { 'bob@canwebuildityeswecan.com' }
   let(:password) { 'abc123' }
-  
-  subject { User.new }
-
-  before :each do
-    subject.name = name
-    subject.email = email
+  let(:attributes) do
+    {
+      name: name,
+      email: email,
+      password: password,
+      password_confirmation: password
+    }
   end
+
+  subject! { User.create!(attributes) }
 
   it 'has a name' do
     expect(subject.name).to eql(name)
@@ -24,12 +27,27 @@ describe User, type: :model do
     expect(User.reflect_on_association(:access_tokens).macro).to eq(:has_many)
   end
 
+  describe 'validation' do
+    it 'must have a name' do
+      subject.name = nil
+      expect(subject).to have(1).errors_on(:name)
+    end
+
+    it 'must have an email' do
+      subject.email = nil
+      expect(subject).to have(1).errors_on(:email)
+    end
+
+    it 'must have a unique email' do
+      non_unique_user = User.new(attributes)
+      expect(non_unique_user).to have(1).errors_on(:email)
+    end
+  end
+
   describe 'secure password' do
     let(:user) { User.find_by_name(name) }
 
     before :each do
-      subject.password = password
-      subject.password_confirmation = password
       subject.save!
     end
 
