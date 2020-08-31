@@ -1,19 +1,23 @@
 class ApplicationController < ActionController::API
-    class NotAuthorizedError < StandardError; end
-    
-    attr_reader :current_user
+  class NotAuthorizedError < StandardError; end
 
-    before_action :authenticate!
+  attr_reader :current_user
 
-    private
+  before_action :authenticate!
 
-    def authenticate!
-        token = request.headers['Authorization']
+  private
 
-        raise NotAuthorizedError unless token && access_token = AccessToken.active.find_by_token(token)
+  def authenticate!
+    token = request.headers['Authorization']
 
-        @current_user = access_token.user
-    end
+    raise NotAuthorizedError unless token && access_token = AccessToken.active.find_by_token(token)
 
-    rescue_from NotAuthorizedError, with: -> { render json: { error: 'Unauthorized' }, status: 401 }
+    @current_user = access_token.user
+  end
+
+  rescue_from NotAuthorizedError, with: -> { render json: { error: 'Unauthorized' }, status: 401 }
+  
+  rescue_from ActiveRecord::RecordInvalid do |error|
+    render json: { error: error.message }, status: 400
+  end
 end
