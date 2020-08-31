@@ -89,6 +89,8 @@ GEM
     eventmachine (1.2.7)
     faraday (1.0.1)
       multipart-post (>= 1.2, < 3)
+    faraday-http-cache (2.2.0)
+      faraday (>= 0.8)
     ffi (1.13.1)
     formatador (0.2.5)
     globalid (0.4.2)
@@ -239,6 +241,7 @@ DEPENDENCIES
   em-http-request
   em-synchrony
   faraday
+  faraday-http-cache
   guard
   guard-rspec
   listen (~> 3.2)
