@@ -2,13 +2,13 @@ require 'rails_helper'
 
 describe Petfinder::Service do
   let(:client) { instance_double(Petfinder::Client, fetch_token: token, token: token) }
-  let(:connection) { instance_double(Faraday) }
+  let(:connection) { instance_double(Faraday::Connection) }
   let(:token) { 'abc123' }
 
   subject { Petfinder::Service.client }
 
   before :each do
-    allow(Faraday).to receive(:new).and_return(connection)
+    allow(Faraday::Connection).to receive(:new).and_return(connection)
 
     Petfinder::Service.instance_variable_set("@client", nil)
 
@@ -32,6 +32,14 @@ describe Petfinder::Service do
 
       it 'fetches an access token' do
         expect(subject.token).to be_instance_of(String)
+      end
+    end
+
+    describe 'connection' do
+      it 'is setup for asynchronous connections' do
+        allow(Faraday::Connection).to receive(:new).and_yield(connection).and_return(connection)
+        expect(connection).to receive(:adapter).with(Faraday::Adapter::EMSynchrony)
+        subject
       end
     end
 
