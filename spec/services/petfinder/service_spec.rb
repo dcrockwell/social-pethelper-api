@@ -31,7 +31,8 @@ describe Petfinder::Service do
       end
 
       it 'fetches an access token' do
-        expect(subject.token).to be_instance_of(String)
+        expect(client).to receive(:fetch_token)
+        subject
       end
     end
 
@@ -39,6 +40,7 @@ describe Petfinder::Service do
       it 'is setup for asynchronous connections' do
         allow(Faraday::Connection).to receive(:new).and_yield(connection).and_return(connection)
         expect(connection).to receive(:adapter).with(Faraday::Adapter::EMSynchrony)
+        expect(connection).to receive(:use).with(Faraday::HttpCache, { store: Rails.cache, logger: Rails.logger })
         subject
       end
     end
@@ -46,6 +48,12 @@ describe Petfinder::Service do
     describe 'subsequent calls' do
       it 'returns the same Petfinder client' do
         expect(subject).to be(Petfinder::Service.client)
+      end
+
+      it 'does NOT fetch a new token' do
+        subject
+        expect(client).to_not receive(:fetch_token)
+        Petfinder::Service.client
       end
     end
   end
