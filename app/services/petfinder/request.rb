@@ -1,19 +1,23 @@
 module Petfinder::Request
-    private
-    
-    def post(path:, data:)
-        request method: :post, path: path, data: data
-    end
+  private
 
-    def request(method:, path:, data:)
-        response = case method
-        when :post then connection.post(url + path, data)
-        end
+  def post(path:, data: {}, headers: {})
+    request method: :post, path: path, data: data, headers: headers
+  end
 
-        body = JSON.parse(response.body)
+  def get(path:, data: {}, headers: {})
+    request method: :get, path: path, data: data, headers: headers
+  end
 
-        raise Petfinder::Client::RequestError, body['detail'] if response.status != 200
+  def request(method:, path:, data: {}, headers: {})
+    headers[:Authorization] = "Bearer #{token}"
 
-        return body
-    end
+    response = connection.public_send(method, url + path, data, headers)
+
+    body = JSON.parse(response.body)
+
+    raise Petfinder::Client::RequestError, body['detail'] if response.status != 200
+
+    body
+  end
 end

@@ -1,0 +1,24 @@
+{
+    "animals": [
+        {
+            "name": "Spot",
+            "species": "dog",
+            "distance": 1.5
+        },
+        {
+            "name": "Fluffy",
+            "species": "cat",
+            "distance": 2.5
+        },
+        {
+            "name": "Fido",
+            "species": "dog",
+            "distance": 2.0
+        },
+        {
+            "name": "Floof Ball",
+            "species": "cat",
+            "distance": 3.0
+        }
+    ]
+}
