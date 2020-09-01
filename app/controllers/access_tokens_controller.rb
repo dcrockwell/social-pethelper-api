@@ -5,7 +5,7 @@ class AccessTokensController < ApplicationController
     email, password = authentication_params
     user = User.find_by_email(email)
 
-    raise NotAuthorizedError unless user.authenticate(password)
+    raise NotAuthorizedError unless user && user.authenticate(password)
 
     access_token = user.access_tokens.create!(expires_at: DateTime.now + 1.day)
 

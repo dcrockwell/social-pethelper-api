@@ -34,7 +34,24 @@ describe 'AccessToken', type: :request do
       end
     end
 
-    describe 'with invalid login information' do
+    describe 'with invalid email' do
+      before :each do
+        post '/access_token', params: { email: 'invalid@emial.com', password: 'invalid-password' }
+      end
+
+      it 'returns unauthorized status code' do
+        expect(response).to have_http_status(:unauthorized)
+      end
+
+      it 'returns unauthorized error' do
+        expected_json = {
+          error: 'Unauthorized'
+        }
+        expect(response.body).to include_json(expected_json)
+      end
+    end
+
+    describe 'with invalid password' do
       before :each do
         post '/access_token', params: { email: user.email, password: 'invalid-password' }
       end
