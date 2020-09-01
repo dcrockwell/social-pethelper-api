@@ -18,6 +18,6 @@ module Petfinder::Request
 
     raise Petfinder::Client::RequestError, body['detail'] if response.status != 200
 
-    body
+    return body
   end
 end

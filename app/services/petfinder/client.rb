@@ -61,15 +61,19 @@ module Petfinder
     #
     # Fetch animal data from Petfinder
     #
+    # 
+    #
     # @example
     #   client = Petfinder::Client.new(**configuration)
     #   animal_data = client.animals
+    #   beverly_hills_cats = client.animals(location: 90210, type: 'Cat')
+    #   random_dogs = client.animals(sort: 'random', type: 'Dog')
     #
     # @raise [Petfinder::RequestError] if the request is unsuccessful
     # @return [Hash] Deserialized JSON Animal Data
     #
-    def animals
-      get(path: '/animals')['animals']
+    def animals(**parameters)
+      get(path: '/animals', data: parameters)['animals']
     end
   end
 end
