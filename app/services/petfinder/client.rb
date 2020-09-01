@@ -53,7 +53,7 @@ module Petfinder
         client_secret: @secret
       }
 
-      body = post path: TOKEN_PATH, data: credentials
+      body = post path: TOKEN_PATH, data: credentials, maximum_retries: 0
 
       @token = body['access_token']
     end
