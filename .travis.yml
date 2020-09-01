@@ -1,6 +1,4 @@
 language: ruby
-rvm:
-  - 2.7
 install: bundle install
 script:
   - bundle exec rspec --format doc
