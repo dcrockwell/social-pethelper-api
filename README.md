@@ -1,5 +1,7 @@
 # Social Pethelper
 
+[![Build Status](https://travis-ci.org/dcrockwell/social-petfinder-api.svg?branch=master)](https://travis-ci.org/dcrockwell/social-petfinder-api)
+
 Help animals in need with a single click each week!
 
 1. Download the App
