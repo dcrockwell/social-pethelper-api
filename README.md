@@ -1,6 +1,6 @@
 # Social Pethelper
 
-[![Build Status](https://travis-ci.org/dcrockwell/social-pethelper-api.svg?branch=master)](https://travis-ci.org/dcrockwell/social-pethelper-api)
+[![Build Status](https://travis-ci.org/dcrockwell/social-pethelper-api.svg?branch=master)](https://travis-ci.org/dcrockwell/social-pethelper-api) [![Coverage Status](https://coveralls.io/repos/github/dcrockwell/social-pethelper-api/badge.svg?branch=master)](https://coveralls.io/github/dcrockwell/social-pethelper-api?branch=master)
 
 Help animals in need with a single click each week!
 

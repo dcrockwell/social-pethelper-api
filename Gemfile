@@ -63,3 +63,4 @@ gem 'addressable'
 gem 'em-synchrony'
 gem 'em-http-request'
 gem 'faraday-http-cache'
+gem 'coveralls', require: false
