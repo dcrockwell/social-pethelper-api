@@ -11,7 +11,28 @@ class AnimalsController < ApplicationController
   private
 
   def search_params
-    params.permit
+    params.permit(
+      :type,
+      :breed,
+      :size,
+      :gender,
+      :age,
+      :color,
+      :coat,
+      :status,
+      :name,
+      :organization,
+      :good_with_children,
+      :good_with_dogs,
+      :good_with_cats,
+      :location,
+      :distance,
+      :before,
+      :after,
+      :sort,
+      :page,
+      :limit
+    )
   end
 
   def search_query

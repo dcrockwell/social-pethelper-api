@@ -39,7 +39,7 @@ describe 'Animal Search', type: :request do
       expect(response.body).to include_json(animals)
     end
 
-    it 'creates a new search database when unique' do
+    it 'creates a new search record in the database when unique' do
       expect(last_search.query_parameters).to be_blank
     end
 
