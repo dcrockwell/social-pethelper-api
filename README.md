@@ -22,7 +22,7 @@ It's simple to get started. Here are the steps:
 
 ```bash
 curl --request POST \
-  --url http://localhost:3000/users \
+  --url https://social-pethelper.herokuapp.com/users \
   --header 'content-type: application/json' \
   --data '{
     "name": "Bob T. Builder",
@@ -50,7 +50,7 @@ curl --request POST \
 
 ```bash
 curl --request POST \
-  --url http://localhost:3000/access_token \
+  --url https://social-pethelper.herokuapp.com/access_token \
   --header 'content-type: application/json' \
   --data '{
 	    "email": "your@email-here.com",
@@ -76,7 +76,7 @@ curl --request POST \
 
 ```bash
 curl --request GET \
-  --url http://localhost:3000/animals \
+  --url https://social-pethelper.herokuapp.com/animals \
   --header 'authorization: 5672f190a849aba34ecaa84996162996'
 ```
 
